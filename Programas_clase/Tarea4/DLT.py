@@ -20,13 +20,12 @@ def solve_dlt(points_3d, points_2d):
     # La solución es la última fila de Vh
     P = Vh[-1].reshape(3, 4)
     
-    # Normalizar para que el último elemento sea 1 (opcional pero limpio)
     if P[-1, -1] != 0:
         P = P / P[-1, -1]
         
     return P
 
-# --- DATOS DEL MODELO REAL BASADOS EN TU FOTO (Sencillo y Rápido) ---
+
 
 # Coordenadas en el Mundo 3D (Caja estimada 15x8x3 cm)
 # (X, Y, Z)
@@ -53,16 +52,16 @@ pts_2d = np.array([
 # Ejecutar el cálculo DLT
 matriz_P = solve_dlt(pts_3d, pts_2d)
 
-# --- RESULTADOS PARA TU REPORTE ---
 print("-" * 30)
 print("MATRIZ DE PROYECCIÓN P CALCULADA (DLT):")
 print("-" * 30)
-# Imprimir con formato bonito
+#Imprimir el resultado
 np.set_printoptions(suppress=True, precision=5)
 print(matriz_P)
 print("-" * 30)
 
-# PRUEBA DE FUEGO: REPROYECCIÓN
+
+
 print("\nPrueba de coherencia (Reproyectar Puntos):")
 for i in range(len(pts_3d)):
     M_homo = np.append(pts_3d[i], 1) # Punto 3D en homogéneas
