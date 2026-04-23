@@ -7,13 +7,8 @@ utilizando :
 
 Curso: MCA2 clases 23 y 25 marzo 2026. Notas 23 y 24 marzo
 
-Objetivo: Dada la Ecuación cuadrática (elipse)
-              31x^2 - 24xy + 21y^2 + 4x + 6y = 25      
-  
-          Obtener los eigenvalores y eigenvectores de la matriz 
-          aspciada a su forma cuadratica
-                  (  31   -12 )
-                  (  -12   21 )
+Readaptacíon del código visto en clase, para obtener los eigenvalores y eigenvectores del inciso a)
+
       
 Referencias:
     - https://docs.sympy.org/latest/modules/matrices/matrices.html
@@ -29,7 +24,7 @@ Created  Sun 23 Marzo 2026
 Editada  9 Abril 2026
 """
 
-from sympy import Matrix
+from sympy import Matrix, Rational
 import numpy as np
 
 
@@ -43,7 +38,7 @@ A1 = np.array([[1, 2],
 
 # Para SymPy (Exacto)
 A2 = Matrix([[1, 2], 
-             [2, Matrix(40001, 10000)]])
+             [2, Rational(40001, 10000)]])
 
 eigenvalores, eigenvectores = np.linalg.eig(A1)
 print("\nEigenvalores y Eigenvectores con numpy \n")
@@ -67,6 +62,6 @@ for i, (val, mult, vecs) in enumerate(eigen_data):
         print(f"  Un eigenvector de {val} es: {vec.tolist()}")
 
 # Presentar los vectores en forma de la matiz P.
-print("\nMatriz  del inciso a) de eigenvectores: ")
+print("\nMatriz  del inciso c) de eigenvectores: ")
 P = A2.eigenvects()[0][2][0].row_join(A2.eigenvects()[1][2][0])
 print("P  = ", P.tolist())

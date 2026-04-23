@@ -7,13 +7,8 @@ utilizando :
 
 Curso: MCA2 clases 23 y 25 marzo 2026. Notas 23 y 24 marzo
 
-Objetivo: Dada la Ecuación cuadrática (elipse)
-              31x^2 - 24xy + 21y^2 + 4x + 6y = 25      
-  
-          Obtener los eigenvalores y eigenvectores de la matriz 
-          aspciada a su forma cuadratica
-                  (  31   -12 )
-                  (  -12   21 )
+Readaptacíon del código visto en clase, para obtener los eigenvalores y eigenvectores del inciso a)
+
       
 Referencias:
     - https://docs.sympy.org/latest/modules/matrices/matrices.html
@@ -48,6 +43,11 @@ print("\nEigenvalores y Eigenvectores con numpy \n")
 print("Eigenvalores:\n", eigenvalores)
 print("Eigenvectores unitarios:\n", eigenvectores)
 
+
+
+# 2. Calcular los eigenvalores y eigenvectores utiizando sympy
+
+A2 = Matrix(A1)
 # eigenvects() devuelve una lista de tuplas: 
 # (eigenvalor, multiplicidad, [eigenvectores])
 eigen_data = A2.eigenvects()
@@ -59,7 +59,9 @@ for i, (val, mult, vecs) in enumerate(eigen_data):
         # SymPy ya devuelve las fracciones simplificadas
         print(f"  Un eigenvector de {val} es: {vec.tolist()}")
 
-# Presentar los vectores en forma de la matiz P.
-print("\nMatriz  del inciso a) de eigenvectores: ")
-P = A1.eigenvects()[0][2][0].row_join(A2.eigenvects()[1][2][0])
-print("P  = ", P.tolist())
+
+print("\nMatriz P de eigenvectores (inciso b): ")
+# Extraemos los 4 vectores propios de SymPy
+vecs_lista = [data[2][0] for data in eigen_data]
+P = vecs_lista[0].row_join(vecs_lista[1]).row_join(vecs_lista[2]).row_join(vecs_lista[3])
+print("P = ", P.tolist())
